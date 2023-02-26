@@ -1,12 +1,11 @@
 //import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import styles from './contact-form.module.scss';
 
 import { initialState } from './initialState';
 import { useForm } from '../../shared/hooks/useFrom';
 import { addContact } from 'redux/contacts/contacts-slice';
-import { getContacts } from 'redux/contacts/contacts-selector';
 
 const ContactForm = () => {
   // Отримуємо посилання на функцію відправки екшенів
