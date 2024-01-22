@@ -7,9 +7,6 @@ export const useForm = ({ initialState, onSubmit }) => {
     evt.preventDefault();
     onSubmit(state);
     setState(initialState);
-    // if (onSubmit(state)) {
-    //   setState(initialState);
-    // }
     const form = evt.target;
     form.reset();
   };

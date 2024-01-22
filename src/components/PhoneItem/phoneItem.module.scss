@@ -1,7 +1,15 @@
 @import 'src/styles/shared.scss';
 
 .item {
-  font-size: 15px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 2em 6em;
+  font-size: 14px;
   font-weight: 500;
   margin-bottom: 0.7em;
+  gap: 0.6em;
+}
+
+.small {
+  padding: 4px 10px;
 }

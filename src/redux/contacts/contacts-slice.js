@@ -1,41 +1,62 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
+
+import {
+  fetchContacts,
+  deleteContact,
+  addContact,
+} from './contacts-operations';
+
+const initialState = {
+  contacts: [],
+  isLoading: false,
+  error: null,
+};
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: { contacts: [] },
-  reducers: {
-    addContact: {
-      reducer: (state, action) => {
-        const { name } = action.payload;
-        if (name) {
-          const normalizeName = name.toLocaleLowerCase();
-          const isDuplicate = state.contacts.some(
-            ({ name }) => name.toLocaleLowerCase() === normalizeName
-          );
-          if (isDuplicate) {
-            alert(`${name} is already in contacts.`);
-          } else {
-            state.contacts.push(action.payload);
-          }
+  initialState: initialState,
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContacts.pending, store => {
+        store.error = null;
+        store.isLoading = true;
+      })
+      .addCase(fetchContacts.fulfilled, (store, { payload }) => {
+        store.contacts = payload;
+        store.isLoading = false;
+      })
+      .addCase(fetchContacts.rejected, (store, { payload }) => {
+        store.isLoading = false;
+        store.error = payload;
+      })
+      .addCase(addContact.pending, store => {
+        store.error = null;
+        store.isLoading = true;
+      })
+      .addCase(addContact.fulfilled, (store, { payload }) => {
+        store.contacts.push(payload);
+        store.isLoading = false;
+      })
+      .addCase(addContact.rejected, (store, { payload }) => {
+        store.isLoading = false;
+        store.error = payload;
+      })
+      .addCase(deleteContact.pending, store => {
+        store.error = null;
+        store.isLoading = true;
+      })
+      .addCase(deleteContact.fulfilled, (store, { payload }) => {
+        store.isLoading = false;
+        const index = store.contacts.findIndex(el => el.id === payload);
+        if (index >= 0) {
+          store.contacts.splice(index, 1);
         }
-      },
-      prepare: data => {
-        return {
-          payload: {
-            id: nanoid(),
-            ...data,
-          },
-        };
-      },
-    },
-    deleteContact(state, action) {
-      const index = state.contacts.findIndex(({ id }) => id !== action.payload);
-      state.contacts.splice(index - 1, 1);
-    },
+      })
+      .addCase(deleteContact.rejected, (store, { payload }) => {
+        store.isLoading = false;
+        store.error = payload;
+      });
   },
 });
-
-export const { addContact, deleteContact } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;

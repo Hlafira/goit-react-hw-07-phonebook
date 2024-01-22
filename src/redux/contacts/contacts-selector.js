@@ -10,5 +10,5 @@ export const getFilteredContacts = state => {
 };
 
 export const getContactCount = state => {
-  return state.length;
+  return state.contacts.length;
 };

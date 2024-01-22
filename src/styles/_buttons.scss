@@ -1,44 +1,64 @@
 .label {
+  position: relative;
+  max-width: 400px;
+  margin: 2em 0;
   display: block;
   padding-bottom: 3px;
-  font-size: 18px;
+
   font-weight: 500;
-  bottom: 2em;
-  margin-bottom: 1em;
 }
 
-.input {
-  margin-top: 4px;
-  display: block;
-  padding: 0;
-  border-radius: 3px;
+.label input {
+  position: relative;
+  width: 100%;
+  padding: 20px 10px 10px;
   outline: none;
-  border: 1px solid var(--input-border);
-  padding: 3px;
+  box-shadow: none;
+  background: transparent !important;
+  color: #fff;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  z-index: 10;
+  border: none;
+  border-bottom: 2px solid #fff;
+}
 
-  &:focus {
-    border-color: lightblue;
-    box-shadow: 0 0 2px 2px var(--border-shadow);
-  }
+.label span {
+  position: absolute;
+  left: 0;
+  top: -37px;
+  display: block;
+  padding: 20px 0 10px;
+  pointer-events: none;
+  color: #8f8f8f;
+  transition: 0.5s;
+  font-size: 0.75em;
+}
+
+.label input:valid ~ span,
+.label input:focus ~ span {
+  color: #fff;
 }
 
 .button {
-  padding: 2px 5px;
-
-  border-radius: 5px;
-  background-color: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--button-hover);
-  font-size: 13px;
+  padding: 9px 25px;
+  background-color: #fff;
+  border: none;
+  color: #1c1c1c;
+  font-size: 0.9em;
   cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 1s;
 
   &:hover {
-    background-color: rgb(1, 21, 52);
-    color: white;
+    background-color: #45f3ff;
   }
 
   &:active {
     box-shadow: var(--button-active-shadow);
     background-color: var(--border-shadow);
   }
+  
 }

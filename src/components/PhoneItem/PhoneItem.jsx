@@ -1,18 +1,23 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-import { deleteContact } from 'redux/contacts/contacts-slice';
+import { deleteContact } from 'redux/contacts/contacts-operations';
+
 import styles from './phoneItem.module.scss';
 
-const PhoneItem = ({ id, number, name }) => {
+const PhoneItem = ({ id, phone, name }) => {
   const dispatch = useDispatch();
   const onDeleteRedux = () => dispatch(deleteContact(id));
   return (
     <li className={styles.item}>
-      {' '}
-      {name} : {number}
-      &emsp;
-      <button onClick={() => onDeleteRedux()} className={styles.button}>
+      <span>{name}</span>
+      <span>{phone}</span>
+      <span></span>
+
+      <button
+        onClick={() => onDeleteRedux()}
+        className={`${styles.button} ${styles.small}`}
+      >
         Delete
       </button>
     </li>
@@ -23,6 +28,6 @@ export default PhoneItem;
 
 PhoneItem.propTypes = {
   id: PropTypes.string,
-  number: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
