@@ -39,7 +39,8 @@ const ContactForm = () => {
           className={styles.input}
           type="tel"
           name="phone"
-          pattern="(\+\d{1,4}\-)?\d{1,4}\-\d{1,4}\-\d{1,4}"
+          // pattern="(\\+\d{1,4}\-)?\d{1,4}\-\d{1,4}\-\d{1,4}"
+          pattern="(\+\d{1,4}-)?\d{1,4}-\d{1,4}-\d{1,4}"
           title="Enter a valid phone number like 865-211-4452 or +380-097-355-8092"
           placeholder="865-211-4452"
           required
